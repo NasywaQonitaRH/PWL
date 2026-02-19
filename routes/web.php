@@ -2,29 +2,33 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\PhotoController;
+use Termwind\Components\Raw;
 
 Route::get('/hello', [WelcomeController::class, 'Hello']);
 
-Route::get('/world', function () {
-    return 'World';
-});
+Route::get('/world', [WelcomeController::class, 'World']);
 
-Route::get('/test', function () {
-    return 'Welcome to Indomart';
-});
+Route::get('/test', [WelcomeController::class, 'Test']);
 
-Route::get('/about', function () {
-    return 'Nasywa Qonita RH/244107020170';
-});
-Route::get('/user/{name}', function ($name) {
-    return 'Hi, My Name is ' . $name . '!';
-});
-Route::get('/posts/{post}/comments/{comment}', function ($postId, $commentId) {
-    return 'Post ID: ' . $postId . ', Comment ID: ' . $commentId;
-});
-Route::get('/articles/{id}', function ($id) {
-    return 'Article Page: ' . $id;
-});
+Route::get('/about', [WelcomeController::class, 'About']);
+
+Route::get('/user/{name}', [WelcomeController::class, 'User']);
+
+Route::get('/posts/{post}/comments/{comment}', [WelcomeController::class, 'Posts']);
+
+// Route::get('/articles/{id}', [WelcomeController::class, 'Articles']);
+
 Route::get('user/{name?}', function ($name = 'John') {
     return 'My Name is ' . $name;
 });
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'home']);
+Route::get('/greetings', [App\Http\Controllers\HomeController::class, 'greetings']);
+Route::get('/reminder', [App\Http\Controllers\HomeController::class, 'reminder']);
+Route::get('/nasywa', [App\Http\Controllers\AboutController::class, 'nasywa']);
+Route::get('/articles/{id}', [App\Http\Controllers\ArticleController::class, 'show']);
+
+Route::resource('photos', PhotoController::class) -> only(['index', 'show']);
+Route::resource('photos', PhotoController::class) -> except(['create', 'store', 'update', 'destroy', 'edit']);
+
+Route::get('/greets', [WelcomeController::class, 'greets']);
