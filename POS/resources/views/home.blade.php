@@ -1,0 +1,1 @@
+<h1>>Home Page POS</h1>
