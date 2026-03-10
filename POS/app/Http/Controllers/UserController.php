@@ -12,11 +12,13 @@ class UserController extends Controller
         // return view('user', compact('id', 'name'));
         $data = [
             // 'username' => 'customer-1',
-            'nama' => 'Pelanggan Pertama',
-            // 'password' => Hash::make('12345'),
+            'level_id' => 2,
+            'username' => 'manager-3',
+            'nama' => 'Manager 3',
+            'password' => Hash::make('12345'),
             // 'level_id' => 4
         ];
-        UserModel::where('username', 'customer-1')->update($data);
+        UserModel::create($data);
         
         $user = UserModel::all();
         return view('user', ['data' => $user]); 
